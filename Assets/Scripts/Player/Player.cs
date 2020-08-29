@@ -47,8 +47,7 @@ public class Player : SingletonMonobehavior<Player>
     {
         base.Awake();
 
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        print("test");
+        _rigidbody2D = GetComponent<Rigidbody2D>();        
     }
 
     private void Update()

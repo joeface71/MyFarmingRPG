@@ -8,9 +8,10 @@ public class InventoryManager : SingletonMonobehavior<InventoryManager>
 
     [SerializeField] private SOItemList itemList = null;
 
-    private void Start()
+    protected override void Awake() // call setters in awake to avoid null reference exceptions
     {
-        // create item details dictionary
+        base.Awake();
+
         CreateItemDetailsDictionary();
     }
 

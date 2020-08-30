@@ -11,7 +11,7 @@ public abstract class SingletonMonobehavior<T> : MonoBehaviour where T:MonoBehav
             return instance;
         }
     }
-
+    
     protected virtual void Awake()
     {
         if (instance == null)

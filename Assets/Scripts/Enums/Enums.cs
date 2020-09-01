@@ -1,4 +1,12 @@
-﻿public enum ToolEffect
+﻿public enum InventoryLocation
+{
+    player,
+    chest,
+    count  // gives number of inventory locations
+}
+
+
+public enum ToolEffect
 {
     none,
     watering

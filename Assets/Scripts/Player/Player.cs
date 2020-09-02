@@ -33,6 +33,8 @@ public class Player : SingletonMonobehavior<Player>
     public bool idleLeft;
     public bool idleRight;
 
+    private Camera mainCamera;
+
     private Rigidbody2D _rigidbody2D;
 #pragma warning disable 414 // disable warnings
     private Direction playerDirection;
@@ -48,7 +50,8 @@ public class Player : SingletonMonobehavior<Player>
         base.Awake();
 
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        print("test");
+
+        mainCamera = Camera.main;
     }
 
     private void Update()
@@ -165,5 +168,12 @@ public class Player : SingletonMonobehavior<Player>
             isIdle = false;
             movementSpeed = Settings.runningSpeed;
         }        
+    }
+
+
+    public Vector3 GetPlayerViewportPosition()
+    {
+        // Vector3 viewport position (0,0) bottom left (1,1) top right
+        return mainCamera.WorldToViewportPoint(transform.position);
     }
 }

@@ -58,19 +58,23 @@ public class Player : SingletonMonobehavior<Player>
     {
         #region Player Input
 
-        ResetAnimationTriggers();
+        if (!PlayerInputIsDisabled)
+        {
+            ResetAnimationTriggers();
 
-        PlayerMovementInput();
+            PlayerMovementInput();
 
-        PlayerWalkInput();
+            PlayerWalkInput();
 
-        // Send Event to any listeners for player control input
-        EventHandler.CallMovementEvent(xInput, yInput, isWalking, isRunning, isIdle, isCarrying, toolEffect,
-                isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,
-                isLiftingToolRight, isLiftingToolLeft, isLiftingToolUp, isLiftingToolDown,
-                isPickingRight, isPickingLeft, isPickingUp, isPickingDown,
-                isSwingingToolRight, isSwingingToolLeft, isSwingingToolUp, isSwingingToolDown,
-                false, false, false, false);
+            // Send Event to any listeners for player control input
+            EventHandler.CallMovementEvent(xInput, yInput, isWalking, isRunning, isIdle, isCarrying, toolEffect,
+                    isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,
+                    isLiftingToolRight, isLiftingToolLeft, isLiftingToolUp, isLiftingToolDown,
+                    isPickingRight, isPickingLeft, isPickingUp, isPickingDown,
+                    isSwingingToolRight, isSwingingToolLeft, isSwingingToolUp, isSwingingToolDown,
+                    false, false, false, false);
+        }
+               
 
         #endregion
     }
@@ -168,6 +172,39 @@ public class Player : SingletonMonobehavior<Player>
             isIdle = false;
             movementSpeed = Settings.runningSpeed;
         }        
+    }
+
+    private void ResetMovement()
+    {
+        xInput = 0f;
+        yInput = 0f;
+        isRunning = false;
+        isWalking = false;
+        isIdle = true;
+    }
+
+    public void DisablePlayerInputAndResetMovement()
+    {
+        DisablePlayerInput();
+        ResetMovement();
+
+        // Send Event to any listeners for player control input
+        EventHandler.CallMovementEvent(xInput, yInput, isWalking, isRunning, isIdle, isCarrying, toolEffect,
+                isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,
+                isLiftingToolRight, isLiftingToolLeft, isLiftingToolUp, isLiftingToolDown,
+                isPickingRight, isPickingLeft, isPickingUp, isPickingDown,
+                isSwingingToolRight, isSwingingToolLeft, isSwingingToolUp, isSwingingToolDown,
+                false, false, false, false);
+    }
+
+    public void EnablePlayerInput()
+    {
+        PlayerInputIsDisabled = false;
+    }
+
+    public void DisablePlayerInput()
+    {
+        PlayerInputIsDisabled = true;
     }
 
 

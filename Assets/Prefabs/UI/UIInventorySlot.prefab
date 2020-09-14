@@ -177,6 +177,9 @@ MonoBehaviour:
   inventorySlotHighlight: {fileID: 1219091786238158493}
   inventorySlotImage: {fileID: 405430161871296533}
   textMeshProUGUI: {fileID: 2858910550194232140}
+  inventoryBar: {fileID: 0}
+  itemPrefab: {fileID: 8892707515862363049, guid: 7dfed6a72065fea4990673b6a272e2db,
+    type: 3}
   itemDetails:
     itemCode: 0
     itemType: 0

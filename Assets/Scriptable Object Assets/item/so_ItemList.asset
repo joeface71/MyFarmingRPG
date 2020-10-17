@@ -88,8 +88,7 @@ MonoBehaviour:
   - itemCode: 10006
     itemType: 0
     itemDescription: Parsnip Seed
-    itemSprite: {fileID: 6634833228405365077, guid: 5a1df36ac90cfa242908df77f9674580,
-      type: 3}
+    itemSprite: {fileID: 21300000, guid: 7da78110e28e0f74aaa3ef4a41f4c0ed, type: 3}
     itemLongDescription: Grows into parsnips in 5 days
     itemUseGridRadius: 2
     itemUseRadius: 0

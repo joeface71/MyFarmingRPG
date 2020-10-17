@@ -7,6 +7,8 @@ public class InventoryManager : SingletonMonobehavior<InventoryManager>
 {
     private Dictionary<int, ItemDetails> itemDetailsDictionary;
 
+    private int[] selectedInventoryItem; // the index of the array is the inventory list (from the inventoryLocation enmum), and the value is the capacity of that inventory list
+     
     public List<InventoryItem>[] inventoryLists; // array to hold seperate inventory lists (player and chest)
 
     [HideInInspector] public int[] inventoryListCapacityIntArray; // index is the inventory list, value is capacity of that list
@@ -20,6 +22,13 @@ public class InventoryManager : SingletonMonobehavior<InventoryManager>
         CreateInventoryList();
 
         CreateItemDetailsDictionary();
+
+        selectedInventoryItem = new int[(int)InventoryLocation.count];
+
+        for (int i = 0; i < selectedInventoryItem.Length; i++)
+        {
+            selectedInventoryItem[i] = -1; // -1 indicates no item selected
+        }
     }
 
     private void CreateInventoryList()
@@ -127,6 +136,15 @@ public class InventoryManager : SingletonMonobehavior<InventoryManager>
             //  Send event that inventory has been updated
             EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
         }
+    }
+
+    /// <summary>
+    /// Clear the selected inventory item for inventoryLocation 
+    /// </summary>
+    /// <param name="inventoryLocation"></param>
+    public void ClearSelectedInventoryItem(InventoryLocation inventoryLocation)
+    {
+        selectedInventoryItem[(int)inventoryLocation] = -1;
     }
 
     private void AddItemAtPosition(List<InventoryItem> inventoryList, int itemCode)
@@ -249,6 +267,15 @@ public class InventoryManager : SingletonMonobehavior<InventoryManager>
         return itemTypeDescription;
     }
 
+    /// <summary>
+    /// Set the selected inventory item for inventoryLocation to itemCode
+    /// </summary>
+    /// <param name="inventoryLocation"></param>
+    /// <param name="itemCode"></param>
+    public void SetSelectedInventoryItem(InventoryLocation inventoryLocation, int itemCode)
+    {
+        selectedInventoryItem[(int)inventoryLocation] = itemCode;
+    }
 }
 
    
